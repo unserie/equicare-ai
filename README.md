@@ -326,13 +326,11 @@ The FAIR dimensions are adapted for algorithmic systems following Stoyanovich & 
 
 ## Known Limitations
 
-The limitations below are documented honestly in the spirit of the feedback received from Onicio during the project review session. Where a limitation maps directly to a critique raised in that discussion, it is noted.
+**Simulated audit engine**. The current prototype renders pre-computed metric values from scenario data objects derived from published literature. It does not perform live statistical computation against an uploaded model or dataset — the audit pipeline animation is illustrative of what a production system would execute. Note that the upload processing pipeline itself (column role assignment, PII detection and redaction) is a live client-side implementation that reads and processes the uploaded file; only the fairness metrics are pre-specified rather than computed. This is the core gap identified in the feedback session: a production-grade audit system requires a benchmark mechanism — a ground-truth reference against which model outputs are evaluated — that this prototype does not yet implement.
 
-**Simulated audit engine** *(directly addresses instructor benchmark critique)*. The current prototype renders pre-computed metric values from scenario data objects derived from published literature. It does not perform live statistical computation against an uploaded model or dataset — the audit pipeline animation is illustrative of what a production system would execute. Note that the upload processing pipeline itself (column role assignment, PII detection and redaction) is a live client-side implementation that genuinely reads and processes the uploaded file; only the fairness metrics are pre-specified rather than computed. This is the core gap identified in the feedback session: a production-grade audit system requires a benchmark mechanism — a ground-truth reference against which model outputs are evaluated — that this prototype does not yet implement.
+**No live model inference**. Custom system configuration populates the form UI but currently maps to the closest pre-loaded scenario for results. Direct API endpoint integration, MLflow registry access, and Hugging Face model card ingestion are planned but not implemented. As raised in the feedback session, auditing proprietary models is additionally constrained by IP restrictions and the absence of model access — a barrier that no client-side tool alone can fully resolve.
 
-**No live model inference** *(directly addresses instructor scope critique)*. Custom system configuration populates the form UI but currently maps to the closest pre-loaded scenario for results. Direct API endpoint integration, MLflow registry access, and Hugging Face model card ingestion are planned but not implemented. As raised in the feedback session, auditing proprietary models is additionally constrained by IP restrictions and the absence of model access — a barrier that no client-side tool alone can fully resolve.
-
-**No universal model-agnostic architecture** *(directly addresses instructor scope critique)*. The original proposal aimed to audit any model type across any deployment context. Onicio correctly identified this as too broad to implement effectively within the project timeline. The final prototype scopes to five peer-reviewed landmark cases rather than attempting universal coverage. This is a deliberate constraint, not an oversight.
+**No universal model-agnostic architecture**. The final prototype scopes to five peer-reviewed landmark cases rather than attempting universal coverage.
 
 **Five scenarios only.** The demo library covers five well-documented cases. It does not generalise to arbitrary deployment contexts without extending the `SCENARIOS` array with properly sourced data.
 
@@ -346,19 +344,17 @@ The limitations below are documented honestly in the spirit of the feedback rece
 
 ## Future Directions
 
-1. **Benchmark system** *(highest priority — core gap identified in instructor review)*. The most critical next step is implementing a ground-truth benchmark mechanism: a reference dataset and evaluation standard against which model outputs are compared, analogous to how Arena and LLM stats benchmarks work for capability evaluation. Without this, the audit engine cannot move from literature-derived static values to live computed metrics. This is the direction Onicio suggested as the basis for a reworked proposal, and it remains the most important unresolved problem in the architecture.
+1. **Benchmark system** *(highest priority — core gap identified in instructor review)*. The most critical next step is implementing a ground-truth benchmark mechanism: a reference dataset and evaluation standard against which model outputs are compared, analogous to how Arena and LLM stats benchmarks work for capability evaluation. Without this, the audit engine cannot move from literature-derived static values to live computed metrics. This remains the most important unresolved problem in the architecture.
 
 2. **Live metric computation.** Integrate Fairlearn and AIF360 via WebAssembly or a lightweight Python backend (FastAPI) to compute real metrics from uploaded data rather than rendering pre-specified values. This requires the benchmark system above to be in place first.
 
 3. **SHAP computation in-browser.** Run SHAP via a WebAssembly-compiled sklearn pipeline against uploaded CSV/JSON datasets for genuine proxy detection, replacing the current static per-scenario P(sensitive | feature) values.
 
-4. **PDF and JSON export.** Replace the plain-text export with a structured JSON audit record and a print-styled PDF, both appended with a SHA-256 integrity hash via the Web Crypto API.
+4. **Intersectional metric computation.** Implement the Kearns et al. (2018) subgroup fairness auditor to compute metrics for intersectional demographic combinations rather than flagging their absence.
 
-5. **Intersectional metric computation.** Implement the Kearns et al. (2018) subgroup fairness auditor to compute metrics for intersectional demographic combinations rather than flagging their absence.
+5. **Longitudinal re-audit tracking.** Store audit snapshots in IndexedDB to track metric drift over time and flag feedback loop dynamics (D'Amour et al., 2020).
 
-6. **Longitudinal re-audit tracking.** Store audit snapshots in IndexedDB to track metric drift over time and flag feedback loop dynamics (D'Amour et al., 2020).
-
-7. **Model card ingestion.** Parse Hugging Face model cards and Mitchell et al. (2019) formatted documentation to auto-populate the system configuration form, reducing the manual input burden for researchers auditing publicly hosted models.
+6. **Model card ingestion.** Parse Hugging Face model cards and Mitchell et al. (2019) formatted documentation to auto-populate the system configuration form, reducing the manual input burden for researchers auditing publicly hosted models.
 
 ---
 
