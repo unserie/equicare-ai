@@ -28,8 +28,7 @@ All processing occurs locally in the browser. No data is ever transmitted to any
 
 ## Proposal Pivot & Instructor Feedback
 
-The original proposal for this project was for a different system unrelated to algorithmic auditing. The pivot to EquiCare-AI was driven by a more pressing and tractable problem that emerged during the course — the lack of accessible, self-contained tooling for auditing deployed AI systems for demographic bias. The final prototype reflects a more focused and technically grounded direction than the original proposal would have produced.
-
+The original proposal for this project was for a different system unrelated to algorithmic auditing. The pivot to EquiCare-AI was driven by a more pressing and tractable problem that emerged during the course — the lack of accessible, self-contained tooling for auditing deployed AI systems for demographic bias.
 **Key feedback received:**
 
 - **Missing benchmark system.** The approach attempts to audit any arbitrary model in a model-agnostic way, but lacked a clear benchmark — a reference standard against which model outputs could be evaluated. Instructor noted that meaningful equity auditing requires a ground-truth comparison mechanism, similar to how capability benchmarks work in tools like Arena and LLM stats. This critique is directly acknowledged in the Known Limitations section: the current prototype renders pre-specified metric values derived from published empirical literature rather than computing them live against an uploaded model.
