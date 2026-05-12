@@ -5,28 +5,11 @@
 
 ---
 
-**Author:** Maisun Ansary
-**Course:** GHI 563: Foundations of Public Health Applications of Artificial Intelligence
-**Semester:** Spring 2026
-**Institution:** University of Arizona
+**Author:** Maisun Ansary |
+**Course:** GHI 563: Foundations of Public Health Applications of Artificial Intelligence |
+**Semester:** Spring 2026 |
+**Institution:** University of Arizona |
 **Submission deadline:** 5/11/2026 | 11:59 PM
-
----
-
-## Table of Contents
-
-1. [Project Description](#project-description)
-2. [Proposal Pivot & Instructor Feedback](#proposal-pivot--instructor-feedback)
-3. [Problem Statement](#problem-statement)
-4. [Features](#features)
-5. [Installation & Setup](#installation--setup)
-6. [Usage Guide](#usage-guide)
-7. [Technical Implementation](#technical-implementation)
-8. [Methodology](#methodology)
-9. [Scenarios & Data Sources](#scenarios--data-sources)
-10. [Known Limitations](#known-limitations)
-11. [Future Directions](#future-directions)
-12. [References](#references)
 
 ---
 
@@ -45,22 +28,19 @@ All processing occurs locally in the browser. No data is ever transmitted to any
 
 ## Proposal Pivot & Instructor Feedback
 
-The original approved proposal for this project was for a different system unrelated to algorithmic auditing. The pivot to EquiCare-AI was driven by a more pressing and tractable problem that emerged during the course — the lack of accessible, self-contained tooling for auditing deployed AI systems for demographic bias, particularly in high-stakes domains like healthcare and criminal justice. The urgency and real-world relevance of this problem made the pivot the right decision, and the final prototype reflects a more focused and technically grounded direction than the original proposal would have produced.
-
-The prototype was previously developed under the working name **Iku AI** and was reviewed directly with the instructor (Onicio) in a feedback session. That discussion surfaced several important architectural critiques that shaped both the final implementation and the limitations acknowledged in this README.
+The original proposal for this project was for a different system unrelated to algorithmic auditing. The pivot to EquiCare-AI was driven by a more pressing and tractable problem that emerged during the course — the lack of accessible, self-contained tooling for auditing deployed AI systems for demographic bias. The final prototype reflects a more focused and technically grounded direction than the original proposal would have produced.
 
 **Key feedback received:**
 
-- **Missing benchmark system.** The original approach attempted to audit any arbitrary model in a model-agnostic way, but lacked a clear benchmark — a reference standard against which model outputs could be evaluated. Onicio noted that meaningful equity auditing requires a ground-truth comparison mechanism, similar to how capability benchmarks work in tools like Arena and LLM stats. This critique is directly acknowledged in the Known Limitations section: the current prototype renders pre-specified metric values derived from published empirical literature rather than computing them live against an uploaded model.
+- **Missing benchmark system.** The approach attempts to audit any arbitrary model in a model-agnostic way, but lacked a clear benchmark — a reference standard against which model outputs could be evaluated. Instructor noted that meaningful equity auditing requires a ground-truth comparison mechanism, similar to how capability benchmarks work in tools like Arena and LLM stats. This critique is directly acknowledged in the Known Limitations section: the current prototype renders pre-specified metric values derived from published empirical literature rather than computing them live against an uploaded model.
 
-- **Scope too broad.** A fully model-agnostic auditing architecture — one that could handle every model type, parameter space, and deployment context — was identified as impractical within the project timeline. Onicio referenced a parallel experience with another student's project where expanding scope created implementation confusion. In response, EquiCare-AI was scoped to five well-documented, peer-reviewed landmark cases rather than attempting universal model coverage.
+- **Scope too broad.** A fully model-agnostic auditing architecture — one that could handle every model type, parameter space, and deployment context — was identified as too broad of a scope.
 
-- **User input pathway unclear.** The early prototype did not make it sufficiently clear to users what inputs were required and what the system could actually do with them. The final implementation addresses this with an explicit system configuration form, a file format specification panel, and a demo mode that makes the audit pathway unambiguous.
+- **User input pathway unclear.** The prototype did not make it sufficiently clear to users what inputs were required and what the system could actually do with them.
 
-- **IP and access barriers.** The discussion raised the practical problem that auditing proprietary models (e.g. a healthcare insurer's internal XGBoost pipeline, or OpenAI's API) is blocked by IP restrictions and the absence of model access. The final prototype acknowledges this honestly rather than overpromising live inference capability.
+- **IP and access barriers.** The discussion raised the practical problem that auditing proprietary models (e.g. a healthcare insurer's internal XGBoost pipeline, or OpenAI's API) is blocked by IP restrictions and the absence of model access.
 
-Onicio offered the option to either significantly rework the proposal around a benchmark-first architecture or submit the current version with known limitations clearly documented. This README takes the latter path — the prototype is submitted as a working proof-of-concept with honest disclosure of what is simulated versus what is computationally live, and with a concrete roadmap for how the benchmark gap would be addressed in a production system or future research collaboration.
-
+The prototype is submitted as a working proof-of-concept with honest disclosure of what is simulated versus what is computationally live.
 ---
 
 ## Problem Statement
