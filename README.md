@@ -402,4 +402,5 @@ Zhang, B. H., Lemoine, B., & Mitchell, M. (2018). Mitigating unwanted biases wit
 ---
 
 *EquiCare-AI prototype · v3.0 · Demo results derived from published literature · Not for clinical or legal use*
+
 *University of Arizona · College of Public Health*
